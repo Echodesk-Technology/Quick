@@ -43,7 +43,6 @@ Made with <g-emoji class="g-emoji" alias="heart" fallback-src="https://github.gi
 // index.html
 <body>
   <div id="app"></div>
-//...
 </body>
 <p>Entry</p>
 
