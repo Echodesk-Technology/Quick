@@ -1,0 +1,16 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "target": "esnext",
+        "watch": true,
+        "module": "commonjs",
+        "strict": true,
+        "lib": ["dom", "es2019"],
+        "noImplicitAny": true,
+        "baseUrl": ".",
+        "outDir": "lib"
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}
