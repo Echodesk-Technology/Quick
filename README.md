@@ -60,7 +60,7 @@ Made with <g-emoji class="g-emoji" alias="heart" fallback-src="https://github.gi
 </ul>
 
 ```javascript
-import Quick from "quick-js"
+import Quick from "quickjs-component"
 import Welcome from "./views/Welcome";
 
 
@@ -82,7 +82,7 @@ export default class App extends Quick.Component {
 <p>Hello Component:</p>
 
 ```javascript
-import Quick from "quick-js";
+import Quick from "quickjs-component";
 
 const Welcome = (name) => (
     <p>Welcome to your {name} App</p>
