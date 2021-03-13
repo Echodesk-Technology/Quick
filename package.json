@@ -1,6 +1,6 @@
 {
   "name": "quickjs-component",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "main": "lib/quick.js",
   "scripts": {
     "build": "tsc",
@@ -14,7 +14,7 @@
     "nodemon": "^2.0.7",
     "quick-error": "^1.1.0",
     "serve-favicon": "^2.5.0",
-    "snabbdom": "^2.1.0",
+    "snabbdom": "^0.7.0",
     "snabbdom-to-html": "^6.0.0"
   },
   "devDependencies": {

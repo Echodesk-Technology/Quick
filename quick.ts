@@ -1,12 +1,12 @@
 import QuickError from 'quick-error';
-import * as snabbdom from "./node_modules/snabbdom/build/package/init"
-import { propsModule } from "./node_modules/snabbdom/build/package/modules/props"
+import * as snabbdom from 'snabbdom';
+import propsModule from 'snabbdom/modules/props';
 
 
 const reconcile = snabbdom.init([propsModule]);
 
 const root = document.getElementById('app')
-import { h } from "./node_modules/snabbdom/build/package/h"
+import { h } from 'snabbdom';
 const init = require('snabbdom-to-html/init')
 const modules = require('snabbdom-to-html/modules')
 const toHTML = init([
@@ -63,7 +63,7 @@ class Component {
 const _pt: any = Component.prototype
 _pt.isQuickClassComponent = true;
 
-const render = async (el, r?: any) => {
+const render = async (el: any, r?: any) => {
     reconcile(root, el);
 };
 
@@ -72,7 +72,6 @@ const $init = () => {
     fav.href = "/favicon.ico"
     fav.rel = "icon"
     const h = document.getElementsByTagName("head")
-    console.log(h);
 };
 
 
@@ -122,7 +121,7 @@ const view = (view: any) => {
     document.querySelector("#app").innerHTML = renderViewtoHTML
 };
 
-const createElement = (type, props = {}, ...children: any) => {
+const createElement = (type: any, props = {}, ...children: any) => {
     children = children.flat();
     if (type.prototype && type.prototype.isQndReactClassComponent) {
         const componentInstance = new type(props);
