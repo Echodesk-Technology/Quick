@@ -1,27 +1,27 @@
 <br />
-<p align="center">
+<div align="center">
   <a href="https://echodesktechnology.com">
     <img src="https://res.cloudinary.com/serveryguken/image/upload/v1615188992/QuickJS/logo/quickjs-logo_wjx3dw.svg" width="400" height="200"> 
   </a>
-</p>
+</div>
 
 <br />
 
-<p align="center">
+<div align="center">
 <img alt="Downloads" src="https://img.shields.io/npm/dw/quick-js">
 <img alt="GitHub" src="https://img.shields.io/github/license/serverguyken/logsnap">
-</p>
+</div>
 
 
 
-<p align="center">
+<div align="center">
     <!-- <a href="https://logsnap.site">View Demo</a> -->
     ·
     <a href="https://github.com/Echodesk-Technology/QuickJS/issues">Report Bug</a>
     ·
     <a href="https://github.com/Echodesk-Technology/QuickJS/issues">Request Feature</a>
   </p>
-</p>
+</div>
 
 
 
