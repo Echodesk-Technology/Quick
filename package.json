@@ -1,19 +1,15 @@
 {
   "name": "quickjs-component",
-  "version": "1.2.0",
+  "version": "1.4.0",
   "main": "lib/quick.js",
   "scripts": {
-    "build": "tsc",
-    "serve": "nodemon server.js"
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
-    "nodemon": "^2.0.7",
     "quick-error": "^1.1.0",
-    "serve-favicon": "^2.5.0",
     "snabbdom": "^0.7.0",
     "snabbdom-to-html": "^6.0.0"
   },
@@ -25,5 +21,5 @@
   "directories": {
     "lib": "lib"
   },
-  "description": ""
+  "description": "Quickjs"
 }
