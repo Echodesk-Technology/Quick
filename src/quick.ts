@@ -10,9 +10,9 @@ const init = require('snabbdom-to-html/init');
 const modules = require('snabbdom-to-html/modules');
 const toHTML = init([modules.class, modules.props, modules.attributes, modules.style]);
 declare global {
-  interface Window {
-    state: any;
-  }
+    interface Window {
+        state: any;
+    }
 }
 // interface IQuick {
 //     readonly $el: Element,
@@ -24,145 +24,153 @@ declare global {
 // }
 
 class Dep {
-  subscribers = new Set();
-  depend(activeEffect?: any) {
-    if (activeEffect) this.subscribers.add(activeEffect);
-  }
-  notify() {
-    this.subscribers.forEach((sub: any | void) => {
-      sub();
-    });
-  }
+    subscribers = new Set();
+    depend(activeEffect?: any) {
+        if (activeEffect) this.subscribers.add(activeEffect);
+    }
+    notify() {
+        this.subscribers.forEach((sub: any | void) => {
+            sub();
+        });
+    }
 }
 
 class Component {
-  constructor(params: any) {
-    let t: any = this;
-    t.params = params;
-  }
+    constructor(params: any) {
+        let t: any = this;
+        t.params = params;
+    }
 
-  componentDidMount() {}
+    componentDidMount() {}
 
-  setState(partialState: any) {
-    const _this: any = this;
-    _this.state = {
-      ..._this.state,
-      ...partialState,
-    };
-    Quick.__updater(_this);
-  }
+    setState(partialState: any) {
+        const _this: any = this;
+        _this.state = {
+            ..._this.state,
+            ...partialState,
+        };
+        Quick.__updater(_this);
+    }
 
-  render(el: any, r?: any) {
-    reconcile(root, el);
-  }
+    render(el: any, r?: any) {
+        reconcile(root, el);
+    }
 }
 const _pt: any = Component.prototype;
 _pt.isQuickClassComponent = true;
 
-const render = async (el: any, r?: any) => {
-  reconcile(root, el);
+const render = (component: any, root: any) => {
+    if (!component) {
+        new QuickError('Cannot render without component');
+    }
+    if (!root) {
+        new QuickError('Cannot render without DOM element');
+    }
+    if (!component && !root) {
+        new QuickError('Cannot render without Component and DOM element');
+    }
+    reconcile(root, component);
 };
-
 const _init = () => {
-  const fav = document.createElement('link');
-  fav.href = '/favicon.ico';
-  fav.rel = 'icon';
-  const h = document.getElementsByTagName('head');
+    const fav = document.createElement('link');
+    fav.href = '/favicon.ico';
+    fav.rel = 'icon';
+    const h = document.getElementsByTagName('head');
 };
 
 const listener = (target: any, type: any, fn: any, prevent: boolean) => {
-  document.addEventListener(type, (e) => {
-    if (e.target.id === target) {
-      fn();
-    }
-    if (e.target.className === target) {
-      fn();
-    } else {
-      return false;
-    }
-  });
-
-  if (prevent) {
-    document.addEventListener(type, (e: any) => {
-      e.preventDefault();
-      if (target === '' || !target) {
-        new QuickError(`target not passed to listener`);
-      }
-      if (e.target.id === target) {
-        e.preventDefault();
-        fn();
-      }
-      if (e.target.className === target) {
-        e.preventDefault();
-        fn();
-      } else {
-        return false;
-      }
+    document.addEventListener(type, (e) => {
+        if (e.target.id === target) {
+            fn();
+        }
+        if (e.target.className === target) {
+            fn();
+        } else {
+            return false;
+        }
     });
-  }
+
+    if (prevent) {
+        document.addEventListener(type, (e: any) => {
+            e.preventDefault();
+            if (target === '' || !target) {
+                new QuickError(`target not passed to listener`);
+            }
+            if (e.target.id === target) {
+                e.preventDefault();
+                fn();
+            }
+            if (e.target.className === target) {
+                e.preventDefault();
+                fn();
+            } else {
+                return false;
+            }
+        });
+    }
 };
 
 const runBeforeDomLoaded = (func: any) => {
-  document.addEventListener('DOMContentLoaded', () => {
-    func;
-  });
+    document.addEventListener('DOMContentLoaded', () => {
+        func;
+    });
 };
 
 const view = (view: any) => {
-  const renderViewtoHTML = toHTML(view);
-  document.querySelector('#app').innerHTML = renderViewtoHTML;
+    const renderViewtoHTML = toHTML(view);
+    document.querySelector('#app').innerHTML = renderViewtoHTML;
 };
 
 const createElement = (type: any, props = {}, ...children: any) => {
-  children = children.flat();
-  if (type.prototype && type.prototype.isQndReactClassComponent) {
-    const componentInstance = new type(props);
+    children = children.flat();
+    if (type.prototype && type.prototype.isQndReactClassComponent) {
+        const componentInstance = new type(props);
 
-    return componentInstance.render();
-  }
-  if (typeof type == 'function') {
-    return type(props);
-  }
-  props = props || {};
-  let dataProps: any = {};
-  let eventProps: any = {};
-  for (let propKey in props) {
-    // event props always startwith on eg. onClick, onChange etc.
-    if (propKey.startsWith('on')) {
-      // onClick -> click
-      const event = propKey.substring(2).toLowerCase();
-
-      eventProps[event] = props[propKey];
-    } else {
-      dataProps[propKey] = props[propKey];
+        return componentInstance.render();
     }
-  }
-  return h(type, { props }, children);
+    if (typeof type == 'function') {
+        return type(props);
+    }
+    props = props || {};
+    let dataProps: any = {};
+    let eventProps: any = {};
+    for (let propKey in props) {
+        // event props always startwith on eg. onClick, onChange etc.
+        if (propKey.startsWith('on')) {
+            // onClick -> click
+            const event = propKey.substring(2).toLowerCase();
+
+            eventProps[event] = props[propKey];
+        } else {
+            dataProps[propKey] = props[propKey];
+        }
+    }
+    return h(type, { props }, children);
 };
 
 const __updater = (instance: any) => {
-  return instance;
+    return instance;
 };
 
 const config = (env: any) => {
-  if (env === 'production') {
-  }
-  if (env === 'development') {
-  }
-  if (!env || env === '') {
-  }
+    if (env === 'production') {
+    }
+    if (env === 'development') {
+    }
+    if (!env || env === '') {
+    }
 };
 
 const Quick = {
-  Component,
-  runBeforeDomLoaded,
-  view,
-  createElement,
-  __updater,
-  config,
-  render,
-  _init,
-  listener,
+    Component,
+    runBeforeDomLoaded,
+    view,
+    createElement,
+    __updater,
+    config,
+    render,
+    _init,
+    listener,
 };
 
 Quick.runBeforeDomLoaded(Quick._init);
