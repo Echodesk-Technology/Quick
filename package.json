@@ -1,6 +1,6 @@
 {
   "name": "quickjs-component",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "main": "lib/quick.js",
   "scripts": {
     "build": "tsc",
@@ -11,14 +11,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "quick-error": "^1.1.0",
-    "snabbdom": "^0.7.0",
+    "quick-error": "^1.2.0",
+    "snabbdom": "^0.7.4",
     "snabbdom-to-html": "^6.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.13.10",
     "@babel/plugin-transform-react-jsx": "^7.12.17",
-    "@types/node": "^14.14.33",
+    "@types/node": "^14.14.35",
     "prettier": "^2.2.1",
     "tslint": "^6.1.3",
     "tslint-config-prettier": "^1.18.0",
@@ -28,5 +28,7 @@
     "lib": "lib"
   },
   "description": "Quickjs",
-  "files": ["lib/**/*"]
+  "files": [
+    "lib/**/*"
+  ]
 }

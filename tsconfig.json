@@ -9,9 +9,11 @@
         "noImplicitAny": true,
         "baseUrl": ".",
         "outDir": "lib",
-        "declaration": true
+        "declaration": true,
     },
+    "include": ["src"],
     "exclude": [
-        "node_modules"
+        "node_modules",
+        "**/__test/*_"
     ]
 }
