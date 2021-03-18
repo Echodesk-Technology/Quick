@@ -78,6 +78,18 @@ const _init = () => {
     const h = document.getElementsByTagName('head');
 };
 
+const $ = function (selector) {
+    return document.querySelector(selector);
+};
+
+const componentLoaded = (callback: Function) => {
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+            callback();
+        }, 100);
+    });
+};
+
 const listener = (target: any, type: any, fn: any, prevent: boolean) => {
     document.addEventListener(type, (e) => {
         if (e.target.id === target) {
@@ -85,29 +97,8 @@ const listener = (target: any, type: any, fn: any, prevent: boolean) => {
         }
         if (e.target.className === target) {
             fn();
-        } else {
-            return false;
         }
     });
-
-    if (prevent) {
-        document.addEventListener(type, (e: any) => {
-            e.preventDefault();
-            if (target === '' || !target) {
-                new QuickError(`target not passed to listener`);
-            }
-            if (e.target.id === target) {
-                e.preventDefault();
-                fn();
-            }
-            if (e.target.className === target) {
-                e.preventDefault();
-                fn();
-            } else {
-                return false;
-            }
-        });
-    }
 };
 
 const runBeforeDomLoaded = (func: any) => {
@@ -171,6 +162,8 @@ const Quick = {
     render,
     _init,
     listener,
+    $,
+    componentLoaded,
 };
 
 Quick.runBeforeDomLoaded(Quick._init);
